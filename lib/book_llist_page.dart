@@ -2,6 +2,7 @@ import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
 import 'package:book_library/design_system/book_list_item.dart';
+import 'package:book_library/design_system/button_design.dart';
 import 'package:book_library/design_system/items.dart';
 import 'package:flutter/material.dart';
 
@@ -24,13 +25,22 @@ class BookListPage extends StatelessWidget {
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   hintText: 'Start book search...',
                   hintStyle: const TextStyle(
-                    color: AppColors.onPrimaryLight,
+                    color: AppColors.baseOnPrimaryLight,
                     //fontStyle: AppTypography.subtitle2Regular,
                   ),
-                  contentPadding:
-                      const EdgeInsets.fromLTRB(48.0, 19.5, 147.0, 19.5),
+                  contentPadding: const EdgeInsets.only(
+                    left: 48.0,
+                    top: 19.5,
+                    right: 147.0,
+                    bottom: 19.5,
+                  ),
                   prefixIcon: const Padding(
-                    padding: EdgeInsets.fromLTRB(15.0, 18.97, 0.0, 19.03),
+                    padding: EdgeInsets.only(
+                      left: 15.0,
+                      top: 18.97,
+                      right: 0.0,
+                      bottom: 19.03,
+                    ),
                     child: AppIcons.search,
                   ),
                   border: OutlineInputBorder(
@@ -47,7 +57,7 @@ class BookListPage extends StatelessWidget {
                   child: Text(
                     'Books Search',
                     style: AppTypography.headline1Bold.copyWith(
-                      color: AppColors.onPrimaryLight,
+                      color: AppColors.baseOnPrimaryLight,
                     ),
                   ),
                 ),
@@ -65,7 +75,19 @@ class BookListPage extends StatelessWidget {
                     );
                   },
                 ),
-              )
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: CustomButton(
+                    onPressed: () => {
+                      print('presed')
+                      // Output message to the console
+                    },
+                  ),
+                ),
+              ),
             ],
           ),
         ),

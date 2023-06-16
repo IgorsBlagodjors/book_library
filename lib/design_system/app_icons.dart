@@ -8,11 +8,11 @@ class AppIcons {
   static const starBorder = Icon(
     Icons.star_outline,
     size: 16,
-    color: AppColors.primary,
+    color: AppColors.basePrimary,
   );
   static const star = Icon(
     Icons.star,
     size: 16,
-    color: AppColors.primary,
+    color: AppColors.basePrimary,
   );
 }

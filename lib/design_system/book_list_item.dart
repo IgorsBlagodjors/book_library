@@ -35,7 +35,7 @@ class BLBookListItem extends StatelessWidget {
                 Text(
                   items.title,
                   style: AppTypography.subtitle1Bold.copyWith(
-                    color: AppColors.onPrimaryLight,
+                    color: AppColors.baseOnPrimaryLight,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -43,7 +43,7 @@ class BLBookListItem extends StatelessWidget {
                 Text(
                   items.description,
                   style: AppTypography.caption2Regular.copyWith(
-                    color: AppColors.onPrimaryLight,
+                    color: AppColors.baseOnPrimaryLight,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -52,20 +52,20 @@ class BLBookListItem extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    AppIcons.star,
+                    items.star1,
                     const SizedBox(width: 2.67),
-                    AppIcons.starBorder,
+                    items.star2,
                     const SizedBox(width: 2.67),
-                    AppIcons.star,
+                    items.star3,
                     const SizedBox(width: 2.67),
-                    AppIcons.starBorder,
+                    items.star4,
                     const SizedBox(width: 2.67),
-                    AppIcons.star,
+                    items.star5,
                     const SizedBox(width: 2.67),
                     Text(
                       items.grade,
                       style: const TextStyle(
-                        color: AppColors.primary,
+                        color: AppColors.basePrimary,
                       ),
                     )
                   ],
