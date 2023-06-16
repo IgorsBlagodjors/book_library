@@ -21,6 +21,7 @@ class BookListPage extends StatelessWidget {
               const SizedBox(height: 32),
               TextFormField(
                 decoration: InputDecoration(
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
                   hintText: 'Start book search...',
                   hintStyle: const TextStyle(
                     color: AppColors.onPrimaryLight,
@@ -30,10 +31,7 @@ class BookListPage extends StatelessWidget {
                       const EdgeInsets.fromLTRB(48.0, 19.5, 147.0, 19.5),
                   prefixIcon: const Padding(
                     padding: EdgeInsets.fromLTRB(15.0, 18.97, 0.0, 19.03),
-                    child: Icon(
-                      AppIcons.search,
-                      size: 24,
-                    ),
+                    child: AppIcons.search,
                   ),
                   border: OutlineInputBorder(
                     borderSide:

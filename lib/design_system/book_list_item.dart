@@ -52,18 +52,16 @@ class BLBookListItem extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Icon(
-                      AppIcons.starOutline,
-                      color: AppColors.primary,
-                      size: 16,
-                    ),
+                    AppIcons.star,
                     const SizedBox(width: 2.67),
-                    const Icon(AppIcons.star,
-                        color: AppColors.primary, size: 16),
+                    AppIcons.starBorder,
                     const SizedBox(width: 2.67),
-                    const Icon(AppIcons.starOutline,
-                        color: AppColors.primary, size: 16),
-                    const SizedBox(width: 5.33),
+                    AppIcons.star,
+                    const SizedBox(width: 2.67),
+                    AppIcons.starBorder,
+                    const SizedBox(width: 2.67),
+                    AppIcons.star,
+                    const SizedBox(width: 2.67),
                     Text(
                       items.grade,
                       style: const TextStyle(
