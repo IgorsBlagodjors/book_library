@@ -76,15 +76,13 @@ flutter:
   # https://flutter.dev/assets-and-images/#from-packages
 
   assets:
-    - assets/fonts/
-    - assets/images/painting7.jpg
+    - assets/images/painting1.jpg
     - assets/images/painting2.jpg
     - assets/images/painting3.jpg
     - assets/images/painting4.jpg
     - assets/images/painting5.jpg
-    - assets/images/painting1.jpg
+    - assets/images/painting7.jpg
     - assets/images/second_scren.jpg
-
 
   fonts:
     - family: KohSantepheap

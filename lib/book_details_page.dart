@@ -1,13 +1,20 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
+import 'package:book_library/design_system/book_info.dart';
 import 'package:book_library/design_system/button_design.dart';
-import 'package:book_library/design_system/items.dart';
 import 'package:flutter/material.dart';
 
-class BookHome2 extends StatelessWidget {
-  const BookHome2({super.key});
+class BookDetailsPage extends StatefulWidget {
+  final BookInfo selectedItems;
 
+  const BookDetailsPage({super.key, required this.selectedItems});
+
+  @override
+  State<BookDetailsPage> createState() => _BookDetailsPageState();
+}
+
+class _BookDetailsPageState extends State<BookDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +28,11 @@ class BookHome2 extends StatelessWidget {
             const SizedBox(height: 44),
             Row(
               children: [
-                AppIcons.back,
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: AppIcons.back),
                 const SizedBox(width: 87),
                 Expanded(
                   child: Align(
@@ -40,14 +51,14 @@ class BookHome2 extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
-                'assets/images/second_scren.jpg',
+                widget.selectedItems.imageUrl,
                 height: 184,
                 width: 328,
               ),
             ),
             const SizedBox(height: 28),
             Text(
-              'The City of Mist',
+              widget.selectedItems.title,
               style: AppTypography.headline1Bold.copyWith(
                 color: AppColors.baseOnPrimaryLight,
               ),
@@ -61,7 +72,7 @@ class BookHome2 extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Text(
-              'Carlos Ruiz Zafon',
+              widget.selectedItems.author,
               style: AppTypography.body2Regular.copyWith(
                 color: AppColors.basePrimary,
               ),
@@ -100,7 +111,7 @@ class BookHome2 extends StatelessWidget {
                               top: 4,
                             ),
                             child: Text(
-                              '2021',
+                              widget.selectedItems.releasedDate,
                               style: AppTypography.body1SemiBold
                                   .copyWith(color: AppColors.basePrimary),
                             ),
@@ -142,7 +153,7 @@ class BookHome2 extends StatelessWidget {
                               top: 4,
                             ),
                             child: Text(
-                              '176',
+                              widget.selectedItems.numberOfPage,
                               style: AppTypography.body1SemiBold
                                   .copyWith(color: AppColors.basePrimary),
                             ),
@@ -184,7 +195,7 @@ class BookHome2 extends StatelessWidget {
                               top: 4,
                             ),
                             child: Text(
-                              '4',
+                              widget.selectedItems.rating,
                               style: AppTypography.body1SemiBold
                                   .copyWith(color: AppColors.basePrimary),
                             ),
@@ -204,7 +215,7 @@ class BookHome2 extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  Text(textSecondPageLW[0],
+                  Text(widget.selectedItems.description,
                       style: AppTypography.body2Regular
                           .copyWith(color: AppColors.baseOnPrimaryLight)),
                 ],

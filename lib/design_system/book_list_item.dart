@@ -1,5 +1,5 @@
+import 'package:book_library/book_details_page.dart';
 import 'package:book_library/design_system/app_colors.dart';
-import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
 import 'package:book_library/design_system/book_info.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +15,18 @@ class BLBookListItem extends StatelessWidget {
       height: 84,
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              items.imageUrl,
-              height: 84,
-              width: 77,
-              fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              _showBookDetailsPage(context);
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.asset(
+                items.imageUrl,
+                height: 84,
+                width: 77,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           const SizedBox(
@@ -32,20 +37,30 @@ class BLBookListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  items.title,
-                  style: AppTypography.subtitle1Bold.copyWith(
-                    color: AppColors.baseOnPrimaryLight,
+                GestureDetector(
+                  onTap: () {
+                    _showBookDetailsPage(context);
+                  },
+                  child: Text(
+                    items.title,
+                    style: AppTypography.subtitle1Bold.copyWith(
+                      color: AppColors.baseOnPrimaryLight,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  items.description,
-                  style: AppTypography.caption2Regular.copyWith(
-                    color: AppColors.baseOnPrimaryLight,
+                GestureDetector(
+                  onTap: () {
+                    _showBookDetailsPage(context);
+                  },
+                  child: Text(
+                    items.author,
+                    style: AppTypography.caption2Regular.copyWith(
+                      color: AppColors.baseOnPrimaryLight,
+                    ),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(
                   height: 17.3,
@@ -76,5 +91,12 @@ class BLBookListItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _showBookDetailsPage(BuildContext context) async {
+    final route = MaterialPageRoute(builder: (context) {
+      return BookDetailsPage(selectedItems: items);
+    });
+    await Navigator.of(context).push(route);
   }
 }

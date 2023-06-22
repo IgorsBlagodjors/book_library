@@ -82,7 +82,6 @@ class BookListPage extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: CustomButton(
                     onPressed: () => {
-                      print('presed')
                       // Output message to the console
                     },
                   ),
