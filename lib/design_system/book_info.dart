@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-class BookInfo {
+class BookInfo extends Equatable {
   final String title;
   final String author;
-  final String imageUrl;
+  final String assetImage;
   final String grade;
   final String description;
   final String releasedDate;
@@ -15,11 +16,11 @@ class BookInfo {
   final Icon star4;
   final Icon star5;
 
-  BookInfo({
+  const BookInfo({
     required this.description,
     required this.title,
     required this.author,
-    required this.imageUrl,
+    required this.assetImage,
     required this.grade,
     required this.numberOfPage,
     required this.releasedDate,
@@ -30,4 +31,21 @@ class BookInfo {
     required this.star4,
     required this.star5,
   });
+
+  @override
+  List<Object?> get props => [
+        description,
+        title,
+        author,
+        assetImage,
+        grade,
+        numberOfPage,
+        releasedDate,
+        rating,
+        star1,
+        star2,
+        star3,
+        star4,
+        star5,
+      ];
 }

@@ -1,13 +1,30 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
+import 'package:book_library/design_system/book_info.dart';
 import 'package:book_library/design_system/book_list_item.dart';
+import 'package:book_library/design_system/books_repository.dart';
 import 'package:book_library/design_system/button_design.dart';
-import 'package:book_library/design_system/items.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BookListPage extends StatelessWidget {
+class BookListPage extends StatefulWidget {
   const BookListPage({Key? key}) : super(key: key);
+
+  @override
+  State<BookListPage> createState() => _BookListPageState();
+}
+
+class _BookListPageState extends State<BookListPage> {
+  late final BooksRepository booksRepository;
+  Future<List<BookInfo>>? booksFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    booksRepository = context.read();
+    booksFuture = booksRepository.getBook();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +38,13 @@ class BookListPage extends StatelessWidget {
             children: [
               const SizedBox(height: 32),
               TextFormField(
+                //controller: _searchController,
+                onFieldSubmitted: (query) {
+                  setState(() {
+                    booksFuture = booksRepository.search(query);
+                  });
+                },
+
                 decoration: InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   hintText: 'Start book search...',
@@ -63,15 +87,21 @@ class BookListPage extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    final item = items[index];
-                    return BLBookListItem(items: item);
-                  },
-                  itemCount: items.length,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const SizedBox(
-                      height: 16,
+                child: FutureBuilder<List<BookInfo>>(
+                  future: booksFuture,
+                  builder: (context, snapshot) {
+                    final books = snapshot.data ?? [];
+                    return ListView.separated(
+                      itemBuilder: (context, index) {
+                        final item = books[index];
+                        return BLBookListItem(items: item);
+                      },
+                      itemCount: books.length,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          height: 16,
+                        );
+                      },
                     );
                   },
                 ),

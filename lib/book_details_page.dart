@@ -51,7 +51,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
-                widget.selectedItems.imageUrl,
+                widget.selectedItems.assetImage,
                 height: 184,
                 width: 328,
               ),

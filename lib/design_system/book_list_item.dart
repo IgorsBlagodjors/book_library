@@ -22,7 +22,7 @@ class BLBookListItem extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
-                items.imageUrl,
+                items.assetImage,
                 height: 84,
                 width: 77,
                 fit: BoxFit.cover,
