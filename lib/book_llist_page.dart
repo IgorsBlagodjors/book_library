@@ -1,8 +1,10 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
+import 'package:book_library/design_system/book_character.dart';
 import 'package:book_library/design_system/book_info.dart';
 import 'package:book_library/design_system/book_list_item.dart';
+import 'package:book_library/design_system/book_repository.dart';
 import 'package:book_library/design_system/books_repository.dart';
 import 'package:book_library/design_system/button_design.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +21,14 @@ class _BookListPageState extends State<BookListPage> {
   late final BooksRepository booksRepository;
   Future<List<BookInfo>>? booksFuture;
 
+  late final BookRepository _bookRepository;
+  late Future<List<BookCharacter>> _bookFuture;
+
   @override
   void initState() {
     super.initState();
-    booksRepository = context.read();
-    booksFuture = booksRepository.getBook();
+    _bookRepository = context.read();
+    _bookFuture = _bookRepository.getAllCharacters();
   }
 
   @override
@@ -38,10 +43,9 @@ class _BookListPageState extends State<BookListPage> {
             children: [
               const SizedBox(height: 32),
               TextFormField(
-                //controller: _searchController,
                 onFieldSubmitted: (query) {
                   setState(() {
-                    booksFuture = booksRepository.search(query);
+                    _bookFuture = _bookRepository.search(query);
                   });
                 },
 
@@ -87,8 +91,8 @@ class _BookListPageState extends State<BookListPage> {
                 ),
               ),
               Expanded(
-                child: FutureBuilder<List<BookInfo>>(
-                  future: booksFuture,
+                child: FutureBuilder<List<BookCharacter>>(
+                  future: _bookFuture,
                   builder: (context, snapshot) {
                     final books = snapshot.data ?? [];
                     return ListView.separated(
