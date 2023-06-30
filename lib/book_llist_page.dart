@@ -1,11 +1,9 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
-import 'package:book_library/design_system/book_character.dart';
-import 'package:book_library/design_system/book_info.dart';
+import 'package:book_library/design_system/book_item_class.dart';
 import 'package:book_library/design_system/book_list_item.dart';
 import 'package:book_library/design_system/book_repository.dart';
-import 'package:book_library/design_system/books_repository.dart';
 import 'package:book_library/design_system/button_design.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,17 +16,17 @@ class BookListPage extends StatefulWidget {
 }
 
 class _BookListPageState extends State<BookListPage> {
-  late final BooksRepository booksRepository;
-  Future<List<BookInfo>>? booksFuture;
+  late final BookItem booksRepository;
+  Future<List<BookItem>>? booksFuture;
 
   late final BookRepository _bookRepository;
-  late Future<List<BookCharacter>> _bookFuture;
+  late Future<List<BookItem>> _bookFuture;
 
   @override
   void initState() {
     super.initState();
     _bookRepository = context.read();
-    _bookFuture = _bookRepository.getAllCharacters();
+    _bookFuture = _bookRepository.getAllBooksInfo();
   }
 
   @override
@@ -48,13 +46,11 @@ class _BookListPageState extends State<BookListPage> {
                     _bookFuture = _bookRepository.search(query);
                   });
                 },
-
                 decoration: InputDecoration(
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   hintText: 'Start book search...',
                   hintStyle: const TextStyle(
                     color: AppColors.baseOnPrimaryLight,
-                    //fontStyle: AppTypography.subtitle2Regular,
                   ),
                   contentPadding: const EdgeInsets.only(
                     left: 48.0,
@@ -91,7 +87,7 @@ class _BookListPageState extends State<BookListPage> {
                 ),
               ),
               Expanded(
-                child: FutureBuilder<List<BookCharacter>>(
+                child: FutureBuilder<List<BookItem>>(
                   future: _bookFuture,
                   builder: (context, snapshot) {
                     final books = snapshot.data ?? [];

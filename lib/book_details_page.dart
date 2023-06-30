@@ -1,12 +1,12 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
-import 'package:book_library/design_system/book_info.dart';
+import 'package:book_library/design_system/book_item_class.dart';
 import 'package:book_library/design_system/button_design.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsPage extends StatefulWidget {
-  final BookInfo selectedItems;
+  final BookItem selectedItems;
 
   const BookDetailsPage({super.key, required this.selectedItems});
 
@@ -51,7 +51,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
-                widget.selectedItems.assetImage,
+                widget.selectedItems.smallThumbnail,
                 height: 184,
                 width: 328,
               ),
@@ -72,7 +72,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             ),
             const SizedBox(height: 12),
             Text(
-              widget.selectedItems.author,
+              widget.selectedItems.authors,
               style: AppTypography.body2Regular.copyWith(
                 color: AppColors.basePrimary,
               ),
@@ -111,7 +111,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                               top: 4,
                             ),
                             child: Text(
-                              widget.selectedItems.releasedDate,
+                              widget.selectedItems.publishedDate,
                               style: AppTypography.body1SemiBold
                                   .copyWith(color: AppColors.basePrimary),
                             ),
@@ -153,7 +153,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                               top: 4,
                             ),
                             child: Text(
-                              widget.selectedItems.numberOfPage,
+                              widget.selectedItems.pageCount.toString(),
                               style: AppTypography.body1SemiBold
                                   .copyWith(color: AppColors.basePrimary),
                             ),
@@ -195,7 +195,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
                               top: 4,
                             ),
                             child: Text(
-                              widget.selectedItems.rating,
+                              widget.selectedItems.ratingsCount.toString(),
                               style: AppTypography.body1SemiBold
                                   .copyWith(color: AppColors.basePrimary),
                             ),
@@ -215,9 +215,11 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             Expanded(
               child: ListView(
                 children: [
-                  Text(widget.selectedItems.description,
-                      style: AppTypography.body2Regular
-                          .copyWith(color: AppColors.baseOnPrimaryLight)),
+                  Text(
+                    widget.selectedItems.description,
+                    style: AppTypography.body2Regular
+                        .copyWith(color: AppColors.baseOnPrimaryLight),
+                  ),
                 ],
               ),
             ),
@@ -226,9 +228,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: CustomButton(
-                  onPressed: () => {
-                    // Output message to the console
-                  },
+                  onPressed: () => {},
                 ),
               ),
             ),

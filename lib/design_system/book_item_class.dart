@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
-class BookCharacter extends Equatable {
+class BookItem extends Equatable {
   final String id;
   final String title;
   final String description;
@@ -9,8 +8,10 @@ class BookCharacter extends Equatable {
   final double averageRating;
   final String publishedDate;
   final String authors;
+  final int pageCount;
+  final int ratingsCount;
 
-  const BookCharacter({
+  const BookItem({
     required this.id,
     required this.title,
     required this.description,
@@ -18,6 +19,8 @@ class BookCharacter extends Equatable {
     required this.averageRating,
     required this.publishedDate,
     required this.authors,
+    required this.pageCount,
+    required this.ratingsCount,
   });
 
   @override
@@ -29,5 +32,7 @@ class BookCharacter extends Equatable {
         averageRating,
         publishedDate,
         authors,
+        pageCount,
+        ratingsCount,
       ];
 }

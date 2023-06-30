@@ -1,20 +1,6 @@
-import 'dart:convert';
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'book_response.g.dart';
-
-@JsonSerializable(createToJson: false)
-class SingleBookResponse {
-  final BookDataResponse data;
-
-  SingleBookResponse({
-    required this.data,
-  });
-
-  factory SingleBookResponse.fromJson(Map<String, dynamic> json) =>
-      _$SingleBookResponseFromJson(json);
-}
 
 @JsonSerializable(createToJson: false)
 class BookFullResponse {
@@ -49,15 +35,19 @@ class VolumeInfo {
   final List<String>? authors;
   final String? publishedDate;
   final double? averageRating;
+  final int? pageCount;
+  final int? ratingsCount;
   final ImageLinks? imageLinks;
 
   VolumeInfo({
     required this.title,
     required this.description,
-    this.authors,
-    this.publishedDate,
-    this.averageRating,
-    this.imageLinks,
+    required this.authors,
+    required this.publishedDate,
+    required this.averageRating,
+    required this.imageLinks,
+    required this.pageCount,
+    required this.ratingsCount,
   });
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) =>

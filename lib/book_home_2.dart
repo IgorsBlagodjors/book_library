@@ -1,7 +1,7 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
-import 'package:book_library/design_system/book_character.dart';
+import 'package:book_library/design_system/book_item_class.dart';
 import 'package:book_library/design_system/book_repository.dart';
 import 'package:book_library/design_system/button_design.dart';
 import 'package:flutter/material.dart';
@@ -18,18 +18,18 @@ class BookHome2 extends StatefulWidget {
 
 class _BookHome2State extends State<BookHome2> {
   late final BookRepository _bookRepository;
-  late Future<BookCharacter> _bookFuture;
+  late Future<BookItem> _bookFuture;
 
   @override
   void initState() {
     super.initState();
     _bookRepository = context.read();
-    _bookFuture = _bookRepository.getOneCharacterInfo(widget.passedId);
+    _bookFuture = _bookRepository.getOneBookInfo(widget.passedId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<BookCharacter>(
+    return FutureBuilder<BookItem>(
       future: _bookFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -50,7 +50,11 @@ class _BookHome2State extends State<BookHome2> {
                   const SizedBox(height: 44),
                   Row(
                     children: [
-                      AppIcons.back,
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: AppIcons.back),
                       const SizedBox(width: 87),
                       Expanded(
                         child: Align(
@@ -78,8 +82,8 @@ class _BookHome2State extends State<BookHome2> {
                   Text(
                     data.title,
                     style: AppTypography.headline1Bold.copyWith(
-                      color: AppColors.baseOnPrimaryLight,
-                    ),
+                        color: AppColors.baseOnPrimaryLight,
+                        overflow: TextOverflow.ellipsis),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -109,34 +113,27 @@ class _BookHome2State extends State<BookHome2> {
                         child: SizedBox(
                           height: 54,
                           width: 101,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 20.0,
-                              top: 8.0,
-                              right: 20.0,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 8),
+                              Center(
+                                child: Text(
                                   'Released',
                                   style: AppTypography.subtitle2Regular
                                       .copyWith(
                                           color: AppColors.baseOnPrimaryLight),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 13.0,
-                                    top: 4,
-                                  ),
-                                  child: Text(
-                                    data.publishedDate,
-                                    style: AppTypography.body1SemiBold
-                                        .copyWith(color: AppColors.basePrimary),
-                                  ),
+                              ),
+                              const SizedBox(height: 4),
+                              Center(
+                                child: Text(
+                                  data.publishedDate.substring(0, 4),
+                                  style: AppTypography.body1SemiBold
+                                      .copyWith(color: AppColors.basePrimary),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -152,34 +149,27 @@ class _BookHome2State extends State<BookHome2> {
                         child: SizedBox(
                           height: 54,
                           width: 101,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 31.0,
-                              top: 8.0,
-                              right: 31.0,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 8),
+                              Center(
+                                child: Text(
                                   'Pages',
                                   style: AppTypography.subtitle2Regular
                                       .copyWith(
                                           color: AppColors.baseOnPrimaryLight),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 7.0,
-                                    top: 4,
-                                  ),
-                                  child: Text(
-                                    '176',
-                                    style: AppTypography.body1SemiBold
-                                        .copyWith(color: AppColors.basePrimary),
-                                  ),
+                              ),
+                              const SizedBox(height: 4),
+                              Center(
+                                child: Text(
+                                  data.pageCount.toString(),
+                                  style: AppTypography.body1SemiBold
+                                      .copyWith(color: AppColors.basePrimary),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -210,13 +200,12 @@ class _BookHome2State extends State<BookHome2> {
                                       .copyWith(
                                           color: AppColors.baseOnPrimaryLight),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 17.5,
-                                    top: 4,
-                                  ),
+                                const SizedBox(height: 4),
+                                Center(
                                   child: Text(
-                                    data.averageRating.toString(),
+                                    data.averageRating
+                                        .toString()
+                                        .substring(0, 1),
                                     style: AppTypography.body1SemiBold
                                         .copyWith(color: AppColors.basePrimary),
                                   ),
@@ -236,8 +225,8 @@ class _BookHome2State extends State<BookHome2> {
                   Expanded(
                     child: ListView(
                       children: [
-                        Text(data.description
-                            ,style: AppTypography.body2Regular
+                        Text(data.description,
+                            style: AppTypography.body2Regular
                                 .copyWith(color: AppColors.baseOnPrimaryLight)),
                       ],
                     ),

@@ -6,11 +6,6 @@ part of 'book_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SingleBookResponse _$SingleBookResponseFromJson(Map<String, dynamic> json) =>
-    SingleBookResponse(
-      data: BookDataResponse.fromJson(json['data'] as Map<String, dynamic>),
-    );
-
 BookFullResponse _$BookFullResponseFromJson(Map<String, dynamic> json) =>
     BookFullResponse(
       items: (json['items'] as List<dynamic>)
@@ -35,6 +30,8 @@ VolumeInfo _$VolumeInfoFromJson(Map<String, dynamic> json) => VolumeInfo(
       imageLinks: json['imageLinks'] == null
           ? null
           : ImageLinks.fromJson(json['imageLinks'] as Map<String, dynamic>),
+      pageCount: json['pageCount'] as int?,
+      ratingsCount: json['ratingsCount'] as int?,
     );
 
 ImageLinks _$ImageLinksFromJson(Map<String, dynamic> json) => ImageLinks(
