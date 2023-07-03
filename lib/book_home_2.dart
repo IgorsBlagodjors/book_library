@@ -3,7 +3,7 @@ import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
 import 'package:book_library/design_system/book_item_class.dart';
 import 'package:book_library/design_system/book_repository.dart';
-import 'package:book_library/design_system/button_design.dart';
+import 'package:book_library/design_system/add_to_fave_list_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -94,7 +94,7 @@ class _BookHome2State extends State<BookHome2> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    data.title,
+                    data.authors,
                     style: AppTypography.body2Regular.copyWith(
                       color: AppColors.basePrimary,
                     ),
@@ -203,9 +203,7 @@ class _BookHome2State extends State<BookHome2> {
                                 const SizedBox(height: 4),
                                 Center(
                                   child: Text(
-                                    data.averageRating
-                                        .toString()
-                                        .substring(0, 1),
+                                    data.averageRating.toInt().toString(),
                                     style: AppTypography.body1SemiBold
                                         .copyWith(color: AppColors.basePrimary),
                                   ),
@@ -235,9 +233,9 @@ class _BookHome2State extends State<BookHome2> {
                     alignment: Alignment.bottomRight,
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
-                      child: CustomButton(
+                      child: AddToFaveListButton(
                         onPressed: () => {
-                          // Output message to the console
+                          _bookRepository.addBookToWishList(data),
                         },
                       ),
                     ),

@@ -1,10 +1,11 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
+import 'package:book_library/design_system/book_faves_page.dart';
 import 'package:book_library/design_system/book_item_class.dart';
 import 'package:book_library/design_system/book_list_item.dart';
 import 'package:book_library/design_system/book_repository.dart';
-import 'package:book_library/design_system/button_design.dart';
+import 'package:book_library/design_system/show_fave_list_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,9 +17,6 @@ class BookListPage extends StatefulWidget {
 }
 
 class _BookListPageState extends State<BookListPage> {
-  late final BookItem booksRepository;
-  Future<List<BookItem>>? booksFuture;
-
   late final BookRepository _bookRepository;
   late Future<List<BookItem>> _bookFuture;
 
@@ -110,9 +108,11 @@ class _BookListPageState extends State<BookListPage> {
                 alignment: Alignment.bottomRight,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
-                  child: CustomButton(
-                    onPressed: () => {
-                      // Output message to the console
+                  child: ShowFaveListButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => const BookFavesPage(),
+                      ));
                     },
                   ),
                 ),

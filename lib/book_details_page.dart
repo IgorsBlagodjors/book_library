@@ -2,7 +2,7 @@ import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
 import 'package:book_library/design_system/book_item_class.dart';
-import 'package:book_library/design_system/button_design.dart';
+import 'package:book_library/design_system/add_to_fave_list_button.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsPage extends StatefulWidget {
@@ -227,7 +227,7 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
               alignment: Alignment.bottomRight,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16.0),
-                child: CustomButton(
+                child: AddToFaveListButton(
                   onPressed: () => {},
                 ),
               ),

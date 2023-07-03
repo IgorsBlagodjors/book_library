@@ -1,13 +1,15 @@
-import 'dart:ffi';
-
 import 'package:book_library/design_system/book_api_client.dart';
 import 'package:book_library/design_system/book_item_class.dart';
 import 'package:book_library/design_system/book_repository.dart';
+import 'package:book_library/design_system/fave_api_client.dart';
+import 'package:book_library/design_system/fave_book_item.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkBookRepository implements BookRepository {
   final BookApiClient _bookApiClient;
+  final FaveApiClient _faveApiClient;
 
-  NetworkBookRepository(this._bookApiClient);
+  NetworkBookRepository(this._bookApiClient, this._faveApiClient);
 
   @override
   Future<List<BookItem>> getAllBooksInfo() async {
@@ -65,5 +67,42 @@ class NetworkBookRepository implements BookRepository {
       ratingsCount: response.volumeInfo.ratingsCount ?? 0,
     );
     return characters;
+  }
+
+  @override
+  Future<void> addBookToWishList(BookItem item) async {
+    final faveId = await _faveApiClient.addBookToWishList(item);
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final faveIds = sharedPrefs.getStringList('fave_ids') ?? [];
+    faveIds.add(faveId);
+    sharedPrefs.setStringList('fave_ids', faveIds);
+  }
+
+  @override
+  Future<List<FaveBookItem>> getFaveItems() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final faveIds = sharedPrefs.getStringList('fave_ids') ?? [];
+
+    final response = await _faveApiClient.getFaveItems(faveIds);
+    final characters = response.map((character) => FaveBookItem(
+          id: character.data.id,
+          name: character.name,
+          imageUrl: character.data.imageUrl,
+          faveId: character.id,
+          date: character.data.date,
+          pages: character.data.pageCount,
+          rating: character.data.rating,
+          authors: character.data.authors,
+        ));
+    return characters.toList();
+  }
+
+  @override
+  Future<void> removeFromFaves(String faveId) async {
+    await _faveApiClient.removeFromFaves(faveId);
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final faveIds = sharedPrefs.getStringList('fave_ids') ?? [];
+    faveIds.remove(faveId);
+    sharedPrefs.setStringList('fave_ids', faveIds);
   }
 }
