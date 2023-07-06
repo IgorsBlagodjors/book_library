@@ -1,4 +1,4 @@
-import 'package:book_library/design_system/book_response.dart';
+import 'package:book_library/data/items/models/book_response.dart';
 import 'package:dio/dio.dart';
 
 class BookApiClient {

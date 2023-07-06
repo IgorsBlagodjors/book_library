@@ -1,5 +1,5 @@
-import 'package:book_library/design_system/book_item_class.dart';
-import 'package:book_library/design_system/fave_book_item.dart';
+import 'package:book_library/domain/items/faves.model/fave_book_item.dart';
+import 'package:book_library/domain/items/model/book_item_class.dart';
 
 abstract class BookRepository {
   Future<List<BookItem>> getAllBooksInfo();

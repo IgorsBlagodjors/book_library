@@ -1,6 +1,6 @@
-import 'package:book_library/design_system/book_item_class.dart';
-import 'package:book_library/design_system/fave_book_body.dart';
-import 'package:book_library/design_system/fave_book_response.dart';
+import 'package:book_library/data/faves/model/fave_book_body.dart';
+import 'package:book_library/data/faves/model/fave_book_response.dart';
+import 'package:book_library/domain/items/model/book_item_class.dart';
 import 'package:dio/dio.dart';
 
 class FaveApiClient {

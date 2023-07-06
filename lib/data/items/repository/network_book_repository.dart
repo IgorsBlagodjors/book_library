@@ -1,8 +1,10 @@
-import 'package:book_library/design_system/book_api_client.dart';
-import 'package:book_library/design_system/book_item_class.dart';
-import 'package:book_library/design_system/book_repository.dart';
-import 'package:book_library/design_system/fave_api_client.dart';
-import 'package:book_library/design_system/fave_book_item.dart';
+import 'package:book_library/data/items/api/book_api_client.dart';
+
+import 'package:book_library/data/faves/api/fave_api_client.dart';
+import 'package:book_library/domain/items/faves.model/fave_book_item.dart';
+
+import 'package:book_library/domain/items/model/book_item_class.dart';
+import 'package:book_library/domain/items/repository/book_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NetworkBookRepository implements BookRepository {

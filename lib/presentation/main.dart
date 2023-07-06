@@ -1,8 +1,8 @@
-import 'package:book_library/book_llist_page.dart';
-import 'package:book_library/design_system/book_api_client.dart';
-import 'package:book_library/design_system/book_repository.dart';
-import 'package:book_library/design_system/fave_api_client.dart';
-import 'package:book_library/design_system/network_book_repository.dart';
+import 'package:book_library/data/items/api/book_api_client.dart';
+import 'package:book_library/data/items/repository/network_book_repository.dart';
+import 'package:book_library/domain/items/repository/book_repository.dart';
+import 'package:book_library/presentation/chars/book_llist_page.dart';
+import 'package:book_library/data/faves/api/fave_api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,9 +43,9 @@ void main() {
   runApp(
     MultiRepositoryProvider(
       providers: [bookRepositoryProvider],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: BookListPage(),
+        home: BookListPage.withCubit(),
       ),
     ),
   );

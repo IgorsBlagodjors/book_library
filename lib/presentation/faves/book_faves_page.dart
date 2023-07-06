@@ -1,86 +1,72 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
-import 'package:book_library/design_system/book_item_class.dart';
-import 'package:book_library/design_system/book_repository.dart';
-import 'package:book_library/design_system/add_to_fave_list_button.dart';
+import 'package:book_library/presentation/faves/book_fave_list_cubit.dart';
+import 'package:book_library/presentation/faves/book_fave_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BookHome2 extends StatefulWidget {
-  final String passedId;
-
-  const BookHome2({super.key, required this.passedId});
+class BookFavesPage extends StatefulWidget {
+  const BookFavesPage({super.key});
 
   @override
-  State<BookHome2> createState() => _BookHome2State();
+  State<BookFavesPage> createState() => _BookFavesPageState();
+
+  static Widget withCubit() => BlocProvider(
+        create: (context) => BookFaveListCubit(
+          context.read(),
+        ),
+        child: const BookFavesPage(),
+      );
 }
 
-class _BookHome2State extends State<BookHome2> {
-  late final BookRepository _bookRepository;
-  late Future<BookItem> _bookFuture;
+class _BookFavesPageState extends State<BookFavesPage> {
+  late final BookFaveListCubit _cubit;
 
   @override
   void initState() {
     super.initState();
-    _bookRepository = context.read();
-    _bookFuture = _bookRepository.getOneBookInfo(widget.passedId);
+    _cubit = context.read();
+    _cubit.loadItem();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<BookItem>(
-      future: _bookFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
+    return BlocBuilder<BookFaveListCubit, BookFaveListState>(
+      builder: (context, state) {
+        Widget? child;
+        if (state.isLoading) {
+          child = const Center(
             child: CircularProgressIndicator(),
           );
-        }
-        final data = snapshot.data;
-        if (data != null) {
-          return Scaffold(
-            backgroundColor: AppColors.light,
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+        } else if (state.isError) {
+          child = const Center(
+            child: Text('Failure error'),
+          );
+        } else {
+          final data = state.items;
+          child = ListView.builder(
+            itemBuilder: (_, index) => GestureDetector(
+              onTap: () {
+                _cubit.removeFromFaves(data[index].faveId);
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 44),
-                  Row(
-                    children: [
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: AppIcons.back),
-                      const SizedBox(width: 87),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Book Details',
-                            style: AppTypography.headline2Bold.copyWith(
-                              color: AppColors.baseOnPrimaryLight,
-                            ),
-                          ),
-                        ),
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        data[index].imageUrl,
+                        height: 184,
+                        width: 328,
                       ),
-                    ],
-                  ),
-                  const SizedBox(height: 17),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: Image.network(
-                      data.smallThumbnail,
-                      height: 184,
-                      width: 328,
                     ),
                   ),
                   const SizedBox(height: 28),
                   Text(
-                    data.title,
+                    data[index].name,
                     style: AppTypography.headline1Bold.copyWith(
                         color: AppColors.baseOnPrimaryLight,
                         overflow: TextOverflow.ellipsis),
@@ -94,7 +80,7 @@ class _BookHome2State extends State<BookHome2> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    data.authors,
+                    data[index].authors,
                     style: AppTypography.body2Regular.copyWith(
                       color: AppColors.basePrimary,
                     ),
@@ -128,7 +114,7 @@ class _BookHome2State extends State<BookHome2> {
                               const SizedBox(height: 4),
                               Center(
                                 child: Text(
-                                  data.publishedDate.substring(0, 4),
+                                  data[index].date.substring(0, 4),
                                   style: AppTypography.body1SemiBold
                                       .copyWith(color: AppColors.basePrimary),
                                 ),
@@ -164,7 +150,7 @@ class _BookHome2State extends State<BookHome2> {
                               const SizedBox(height: 4),
                               Center(
                                 child: Text(
-                                  data.pageCount.toString(),
+                                  data[index].pages.toString(),
                                   style: AppTypography.body1SemiBold
                                       .copyWith(color: AppColors.basePrimary),
                                 ),
@@ -203,7 +189,7 @@ class _BookHome2State extends State<BookHome2> {
                                 const SizedBox(height: 4),
                                 Center(
                                   child: Text(
-                                    data.averageRating.toInt().toString(),
+                                    data[index].rating.toInt().toString(),
                                     style: AppTypography.body1SemiBold
                                         .copyWith(color: AppColors.basePrimary),
                                   ),
@@ -215,41 +201,58 @@ class _BookHome2State extends State<BookHome2> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
-                  Text('Description',
-                      style: AppTypography.headline2Bold
-                          .copyWith(color: AppColors.baseOnPrimaryLight)),
-                  const SizedBox(height: 16),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        Text(data.description,
-                            style: AppTypography.body2Regular
-                                .copyWith(color: AppColors.baseOnPrimaryLight)),
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
-                      child: AddToFaveListButton(
-                        onPressed: () => {
-                          _bookRepository.addBookToWishList(data),
-                        },
-                      ),
-                    ),
+                  const SizedBox(
+                    height: 50,
                   ),
                 ],
               ),
             ),
-          );
-        } else {
-          return const Column(
-            children: [Text('empty')],
+            itemCount: data.length,
           );
         }
+        return Scaffold(
+          backgroundColor: AppColors.light,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 44),
+                Row(
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: AppIcons.back),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          'Wish List',
+                          style: AppTypography.headline2Bold.copyWith(
+                            color: AppColors.baseOnPrimaryLight,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: child,
+                ),
+              ],
+            ),
+          ),
+        );
       },
     );
   }
+
+/*Future<void> _removeFromFaves(String faveId) async {
+    await _bookRepository.removeFromFaves(faveId);
+    setState(() {
+      _bookFuture = _bookRepository.getFaveItems();
+    });
+  }*/
 }

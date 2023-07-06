@@ -1,14 +1,14 @@
-import 'package:book_library/book_home_2.dart';
+import 'package:book_library/domain/items/model/book_item_class.dart';
+import 'package:book_library/presentation/chars/book_home_2.dart';
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
-import 'package:book_library/design_system/book_item_class.dart';
 import 'package:flutter/material.dart';
 
-class BLBookListItem extends StatelessWidget {
+class BookDetailsPage extends StatelessWidget {
   final BookItem items;
 
-  const BLBookListItem({Key? key, required this.items}) : super(key: key);
+  const BookDetailsPage({Key? key, required this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class BLBookListItem extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => BookHome2(
                 passedId: items.id,
-              ),
+              ).withCubit(),
             ),
           );
         },
