@@ -5,6 +5,7 @@ import 'package:book_library/presentation/faves/book_fave_list_cubit.dart';
 import 'package:book_library/presentation/faves/book_fave_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookFavesPage extends StatefulWidget {
   const BookFavesPage({super.key});
@@ -73,7 +74,7 @@ class _BookFavesPageState extends State<BookFavesPage> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    'Stories',
+                    AppLocalizations.of(context)!.stories,
                     style: AppTypography.subtitle1Bold.copyWith(
                       color: AppColors.baseOnPrimaryLight,
                     ),
@@ -88,103 +89,111 @@ class _BookFavesPageState extends State<BookFavesPage> {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      Card(
-                        color: AppColors.light,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: AppColors.basePrimary,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: SizedBox(
-                          height: 54,
-                          width: 101,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 8),
-                              Center(
-                                child: Text(
-                                  'Released',
-                                  style: AppTypography.subtitle2Regular
-                                      .copyWith(
-                                          color: AppColors.baseOnPrimaryLight),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Center(
-                                child: Text(
-                                  data[index].date.substring(0, 4),
-                                  style: AppTypography.body1SemiBold
-                                      .copyWith(color: AppColors.basePrimary),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Card(
-                        color: AppColors.light,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: AppColors.basePrimary,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: SizedBox(
-                          height: 54,
-                          width: 101,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 8),
-                              Center(
-                                child: Text(
-                                  'Pages',
-                                  style: AppTypography.subtitle2Regular
-                                      .copyWith(
-                                          color: AppColors.baseOnPrimaryLight),
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Center(
-                                child: Text(
-                                  data[index].pages.toString(),
-                                  style: AppTypography.body1SemiBold
-                                      .copyWith(color: AppColors.basePrimary),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 4),
-                      Card(
-                        color: AppColors.light,
-                        shape: RoundedRectangleBorder(
-                          side: const BorderSide(
-                            color: AppColors.basePrimary,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: SizedBox(
-                          height: 54,
-                          width: 101,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 28.0,
-                              top: 8.0,
-                              right: 28.0,
+                      Expanded(
+                        flex: 1,
+                        child: Card(
+                          color: AppColors.light,
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: AppColors.basePrimary,
                             ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: SizedBox(
+                            height: 54,
+                            width: 101,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Rating',
-                                  style: AppTypography.subtitle2Regular
-                                      .copyWith(
-                                          color: AppColors.baseOnPrimaryLight),
+                                const SizedBox(height: 8),
+                                Center(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.released,
+                                    style: AppTypography.subtitle2Regular
+                                        .copyWith(
+                                            color:
+                                                AppColors.baseOnPrimaryLight),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Center(
+                                  child: Text(
+                                    data[index].date.substring(0, 4),
+                                    style: AppTypography.body1SemiBold
+                                        .copyWith(color: AppColors.basePrimary),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        flex: 1,
+                        child: Card(
+                          color: AppColors.light,
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: AppColors.basePrimary,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: SizedBox(
+                            height: 54,
+                            width: 101,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 8),
+                                Center(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.pages,
+                                    style: AppTypography.subtitle2Regular
+                                        .copyWith(
+                                            color:
+                                                AppColors.baseOnPrimaryLight),
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Center(
+                                  child: Text(
+                                    data[index].pages.toString(),
+                                    style: AppTypography.body1SemiBold
+                                        .copyWith(color: AppColors.basePrimary),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Expanded(
+                        flex: 1,
+                        child: Card(
+                          color: AppColors.light,
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: AppColors.basePrimary,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: SizedBox(
+                            height: 54,
+                            width: 101,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(height: 8),
+                                Center(
+                                  child: Text(
+                                    AppLocalizations.of(context)!.rating,
+                                    style: AppTypography.subtitle2Regular
+                                        .copyWith(
+                                            color:
+                                                AppColors.baseOnPrimaryLight),
+                                  ),
                                 ),
                                 const SizedBox(height: 4),
                                 Center(
@@ -229,7 +238,7 @@ class _BookFavesPageState extends State<BookFavesPage> {
                     Expanded(
                       child: Center(
                         child: Text(
-                          'Wish List',
+                          AppLocalizations.of(context)!.wishList,
                           style: AppTypography.headline2Bold.copyWith(
                             color: AppColors.baseOnPrimaryLight,
                           ),
@@ -248,11 +257,4 @@ class _BookFavesPageState extends State<BookFavesPage> {
       },
     );
   }
-
-/*Future<void> _removeFromFaves(String faveId) async {
-    await _bookRepository.removeFromFaves(faveId);
-    setState(() {
-      _bookFuture = _bookRepository.getFaveItems();
-    });
-  }*/
 }

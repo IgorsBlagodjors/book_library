@@ -6,6 +6,7 @@ import 'package:book_library/presentation/chars/bloc/book_home2_list_cubit.dart'
 import 'package:book_library/presentation/chars/bloc/book_home2_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookHome2 extends StatefulWidget {
   final String passedId;
@@ -65,7 +66,7 @@ class _BookHome2State extends State<BookHome2> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Book Details',
+                        AppLocalizations.of(context)!.bookDetails,
                         style: AppTypography.headline2Bold.copyWith(
                           color: AppColors.baseOnPrimaryLight,
                         ),
@@ -92,7 +93,7 @@ class _BookHome2State extends State<BookHome2> {
               ),
               const SizedBox(height: 4),
               Text(
-                'Stories',
+                AppLocalizations.of(context)!.stories,
                 style: AppTypography.subtitle1Bold.copyWith(
                   color: AppColors.baseOnPrimaryLight,
                 ),
@@ -107,100 +108,105 @@ class _BookHome2State extends State<BookHome2> {
               const SizedBox(height: 24),
               Row(
                 children: [
-                  Card(
-                    color: AppColors.light,
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: AppColors.basePrimary,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: SizedBox(
-                      height: 54,
-                      width: 101,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 8),
-                          Center(
-                            child: Text(
-                              'Released',
-                              style: AppTypography.subtitle2Regular.copyWith(
-                                  color: AppColors.baseOnPrimaryLight),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Center(
-                            child: Text(
-                              data.publishedDate.substring(0, 4),
-                              style: AppTypography.body1SemiBold
-                                  .copyWith(color: AppColors.basePrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  Card(
-                    color: AppColors.light,
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: AppColors.basePrimary,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: SizedBox(
-                      height: 54,
-                      width: 101,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 8),
-                          Center(
-                            child: Text(
-                              'Pages',
-                              style: AppTypography.subtitle2Regular.copyWith(
-                                  color: AppColors.baseOnPrimaryLight),
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Center(
-                            child: Text(
-                              data.pageCount.toString(),
-                              style: AppTypography.body1SemiBold
-                                  .copyWith(color: AppColors.basePrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  Card(
-                    color: AppColors.light,
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(
-                        color: AppColors.basePrimary,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: SizedBox(
-                      height: 54,
-                      width: 101,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 28.0,
-                          top: 8.0,
-                          right: 28.0,
+                  Expanded(
+                    flex: 1,
+                    child: Card(
+                      color: AppColors.light,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: AppColors.basePrimary,
                         ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: SizedBox(
+                        height: 54,
+                        width: 101,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Rating',
-                              style: AppTypography.subtitle2Regular.copyWith(
-                                  color: AppColors.baseOnPrimaryLight),
+                            const SizedBox(height: 8),
+                            Center(
+                              child: Text(
+                                AppLocalizations.of(context)!.released,
+                                style: AppTypography.subtitle2Regular.copyWith(
+                                    color: AppColors.baseOnPrimaryLight),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Center(
+                              child: Text(
+                                data.publishedDate.substring(0, 4),
+                                style: AppTypography.body1SemiBold
+                                    .copyWith(color: AppColors.basePrimary),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    flex: 1,
+                    child: Card(
+                      color: AppColors.light,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: AppColors.basePrimary,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: SizedBox(
+                        height: 54,
+                        width: 101,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 8),
+                            Center(
+                              child: Text(
+                                AppLocalizations.of(context)!.pages,
+                                style: AppTypography.subtitle2Regular.copyWith(
+                                    color: AppColors.baseOnPrimaryLight),
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Center(
+                              child: Text(
+                                data.pageCount.toString(),
+                                style: AppTypography.body1SemiBold
+                                    .copyWith(color: AppColors.basePrimary),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    flex: 1,
+                    child: Card(
+                      color: AppColors.light,
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(
+                          color: AppColors.basePrimary,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: SizedBox(
+                        height: 54,
+                        width: 101,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 8),
+                            Center(
+                              child: Text(
+                                AppLocalizations.of(context)!.rating,
+                                style: AppTypography.subtitle2Regular.copyWith(
+                                    color: AppColors.baseOnPrimaryLight),
+                              ),
                             ),
                             const SizedBox(height: 4),
                             Center(
@@ -218,7 +224,7 @@ class _BookHome2State extends State<BookHome2> {
                 ],
               ),
               const SizedBox(height: 24),
-              Text('Description',
+              Text(AppLocalizations.of(context)!.description,
                   style: AppTypography.headline2Bold
                       .copyWith(color: AppColors.baseOnPrimaryLight)),
               const SizedBox(height: 16),

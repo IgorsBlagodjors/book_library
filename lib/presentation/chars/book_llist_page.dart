@@ -8,6 +8,7 @@ import 'package:book_library/presentation/chars/book_details_page.dart';
 import 'package:book_library/design_system/show_fave_list_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BookListPage extends StatefulWidget {
   const BookListPage({Key? key}) : super(key: key);
@@ -80,14 +81,13 @@ class _BookListPageState extends State<BookListPage> {
                     },
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.never,
-                      hintText: 'Start book search...',
+                      hintText: AppLocalizations.of(context)!.searchBar,
                       hintStyle: const TextStyle(
                         color: AppColors.baseOnPrimaryLight,
                       ),
                       contentPadding: const EdgeInsets.only(
                         left: 48.0,
                         top: 19.5,
-                        right: 147.0,
                         bottom: 19.5,
                       ),
                       prefixIcon: const Padding(
@@ -111,7 +111,7 @@ class _BookListPageState extends State<BookListPage> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        'Books Search',
+                        AppLocalizations.of(context)!.bookSearchText,
                         style: AppTypography.headline1Bold.copyWith(
                           color: AppColors.baseOnPrimaryLight,
                         ),

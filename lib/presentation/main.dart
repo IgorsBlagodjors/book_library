@@ -6,6 +6,9 @@ import 'package:book_library/data/faves/api/fave_api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 void main() {
   final dio = Dio(
@@ -44,6 +47,16 @@ void main() {
     MultiRepositoryProvider(
       providers: [bookRepositoryProvider],
       child: MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [
+          Locale('en'),
+          Locale('ru'),
+        ],
         debugShowCheckedModeBanner: false,
         home: BookListPage.withCubit(),
       ),

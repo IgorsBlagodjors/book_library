@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-
 part 'fave_book_body.g.dart';
 
 @JsonSerializable(createFactory: false, explicitToJson: true)
