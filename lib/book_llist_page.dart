@@ -16,14 +16,14 @@ class BookListPage extends StatefulWidget {
 }
 
 class _BookListPageState extends State<BookListPage> {
-  late final BooksRepository booksRepository;
-  Future<List<BookInfo>>? booksFuture;
+  late final BooksRepository _booksRepository;
+  Future<List<BookInfo>>? _booksFuture;
 
   @override
   void initState() {
     super.initState();
-    booksRepository = context.read();
-    booksFuture = booksRepository.getBook();
+    _booksRepository = context.read();
+    _booksFuture = _booksRepository.getBooks();
   }
 
   @override
@@ -38,10 +38,9 @@ class _BookListPageState extends State<BookListPage> {
             children: [
               const SizedBox(height: 32),
               TextFormField(
-                //controller: _searchController,
                 onFieldSubmitted: (query) {
                   setState(() {
-                    booksFuture = booksRepository.search(query);
+                    _booksFuture = _booksRepository.search(query);
                   });
                 },
 
@@ -88,7 +87,7 @@ class _BookListPageState extends State<BookListPage> {
               ),
               Expanded(
                 child: FutureBuilder<List<BookInfo>>(
-                  future: booksFuture,
+                  future: _booksFuture,
                   builder: (context, snapshot) {
                     final books = snapshot.data ?? [];
                     return ListView.separated(

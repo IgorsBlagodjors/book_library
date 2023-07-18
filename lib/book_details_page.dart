@@ -1,3 +1,4 @@
+import 'package:book_library/book_details_number_item.dart';
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
@@ -80,137 +81,28 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             const SizedBox(height: 24),
             Row(
               children: [
-                Card(
-                  color: AppColors.light,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: AppColors.basePrimary,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: SizedBox(
-                    height: 54,
-                    width: 101,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20.0,
-                        top: 8.0,
-                        right: 20.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Released',
-                            style: AppTypography.subtitle2Regular
-                                .copyWith(color: AppColors.baseOnPrimaryLight),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 13.0,
-                              top: 4,
-                            ),
-                            child: Text(
-                              widget.selectedItems.releasedDate,
-                              style: AppTypography.body1SemiBold
-                                  .copyWith(color: AppColors.basePrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                BookDetailsNumberItem(
+                  title: 'Released',
+                  value: widget.selectedItems.releasedDate,
                 ),
                 const SizedBox(width: 4),
-                Card(
-                  color: AppColors.light,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: AppColors.basePrimary,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: SizedBox(
-                    height: 54,
-                    width: 101,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 31.0,
-                        top: 8.0,
-                        right: 31.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Pages',
-                            style: AppTypography.subtitle2Regular
-                                .copyWith(color: AppColors.baseOnPrimaryLight),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 7.0,
-                              top: 4,
-                            ),
-                            child: Text(
-                              widget.selectedItems.numberOfPage,
-                              style: AppTypography.body1SemiBold
-                                  .copyWith(color: AppColors.basePrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                BookDetailsNumberItem(
+                  title: 'Pages',
+                  value: widget.selectedItems.numberOfPage,
                 ),
                 const SizedBox(width: 4),
-                Card(
-                  color: AppColors.light,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: AppColors.basePrimary,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: SizedBox(
-                    height: 54,
-                    width: 101,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 28.0,
-                        top: 8.0,
-                        right: 28.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Rating',
-                            style: AppTypography.subtitle2Regular
-                                .copyWith(color: AppColors.baseOnPrimaryLight),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 17.5,
-                              top: 4,
-                            ),
-                            child: Text(
-                              widget.selectedItems.rating,
-                              style: AppTypography.body1SemiBold
-                                  .copyWith(color: AppColors.basePrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                BookDetailsNumberItem(
+                  title: 'Rating',
+                  value: widget.selectedItems.averageRating.toString(),
                 ),
               ],
             ),
             const SizedBox(height: 24),
-            Text('Description',
-                style: AppTypography.headline2Bold
-                    .copyWith(color: AppColors.baseOnPrimaryLight)),
+            Text(
+              'Description',
+              style: AppTypography.headline2Bold
+                  .copyWith(color: AppColors.baseOnPrimaryLight),
+            ),
             const SizedBox(height: 16),
             Expanded(
               child: ListView(

@@ -1,5 +1,6 @@
 import 'package:book_library/book_details_page.dart';
 import 'package:book_library/design_system/app_colors.dart';
+import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
 import 'package:book_library/design_system/book_info.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +14,13 @@ class BLBookListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 84,
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              _showBookDetailsPage(context);
-            },
-            child: ClipRRect(
+      child: GestureDetector(
+        onTap: (){
+          _showBookDetailsPage(context);
+        },
+        child: Row(
+          children: [
+            ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
                 items.assetImage,
@@ -28,67 +29,57 @@ class BLBookListItem extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-          ),
-          const SizedBox(
-            width: 16,
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    _showBookDetailsPage(context);
-                  },
-                  child: Text(
+            const SizedBox(
+              width: 16,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
                     items.title,
                     style: AppTypography.subtitle1Bold.copyWith(
                       color: AppColors.baseOnPrimaryLight,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                const SizedBox(height: 4),
-                GestureDetector(
-                  onTap: () {
-                    _showBookDetailsPage(context);
-                  },
-                  child: Text(
+                  const SizedBox(height: 4),
+                  Text(
                     items.author,
                     style: AppTypography.caption2Regular.copyWith(
                       color: AppColors.baseOnPrimaryLight,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                const SizedBox(
-                  height: 17.3,
-                ),
-                Row(
-                  children: [
-                    items.star1,
-                    const SizedBox(width: 2.67),
-                    items.star2,
-                    const SizedBox(width: 2.67),
-                    items.star3,
-                    const SizedBox(width: 2.67),
-                    items.star4,
-                    const SizedBox(width: 2.67),
-                    items.star5,
-                    const SizedBox(width: 2.67),
-                    Text(
-                      items.grade,
-                      style: const TextStyle(
-                        color: AppColors.basePrimary,
+                  const SizedBox(
+                    height: 17,
+                  ),
+                  Row(
+                    children: [
+                      Row(
+                        children: List.generate(5, (index) {
+                          if (index < items.rating) {
+                            return AppIcons.star;
+                          } else {
+                            return AppIcons.starBorder;
+                          }
+                        }),
                       ),
-                    )
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
+                      const SizedBox(width: 3),
+                      Text(
+                        items.grade,
+                        style: const TextStyle(
+                          color: AppColors.basePrimary,
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
