@@ -83,8 +83,7 @@ class BookListPage extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: CustomButton(
-                    onPressed: () => {
-                    },
+                    onPressed: () => {},
                   ),
                 ),
               ),
