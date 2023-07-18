@@ -29,17 +29,16 @@ class BookListPage extends StatelessWidget {
                     //fontStyle: AppTypography.subtitle2Regular,
                   ),
                   contentPadding: const EdgeInsets.only(
-                    left: 48.0,
-                    top: 19.5,
-                    right: 147.0,
-                    bottom: 19.5,
+                    left: 48,
+                    top: 20,
+                    right: 147,
+                    bottom: 20,
                   ),
                   prefixIcon: const Padding(
                     padding: EdgeInsets.only(
-                      left: 15.0,
-                      top: 18.97,
-                      right: 0.0,
-                      bottom: 19.03,
+                      left: 15,
+                      top: 19,
+                      bottom: 19,
                     ),
                     child: AppIcons.search,
                   ),
@@ -51,7 +50,10 @@ class BookListPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 32, bottom: 20),
+                padding: const EdgeInsets.only(
+                  top: 32,
+                  bottom: 20,
+                ),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -82,7 +84,6 @@ class BookListPage extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: CustomButton(
                     onPressed: () => {
-                      // Output message to the console
                     },
                   ),
                 ),

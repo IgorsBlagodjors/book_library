@@ -82,9 +82,9 @@ class BookHome2 extends StatelessWidget {
                     width: 101,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        left: 20.0,
-                        top: 8.0,
-                        right: 20.0,
+                        left: 20,
+                        top: 8,
+                        right: 20,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +96,7 @@ class BookHome2 extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                              left: 13.0,
+                              left: 13,
                               top: 4,
                             ),
                             child: Text(
@@ -124,9 +124,9 @@ class BookHome2 extends StatelessWidget {
                     width: 101,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        left: 31.0,
-                        top: 8.0,
-                        right: 31.0,
+                        left: 31,
+                        top: 8,
+                        right: 31,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,7 +138,7 @@ class BookHome2 extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                              left: 7.0,
+                              left: 7,
                               top: 4,
                             ),
                             child: Text(
@@ -166,9 +166,9 @@ class BookHome2 extends StatelessWidget {
                     width: 101,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                        left: 28.0,
-                        top: 8.0,
-                        right: 28.0,
+                        left: 28,
+                        top: 8,
+                        right: 28,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +180,7 @@ class BookHome2 extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
-                              left: 17.5,
+                              left: 18,
                               top: 4,
                             ),
                             child: Text(
@@ -213,10 +213,9 @@ class BookHome2 extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: 16),
                 child: CustomButton(
                   onPressed: () => {
-                    // Output message to the console
                   },
                 ),
               ),

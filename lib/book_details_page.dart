@@ -1,6 +1,7 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
+import 'package:book_library/design_system/book_details_number_item.dart';
 import 'package:book_library/design_system/book_info.dart';
 import 'package:book_library/design_system/button_design.dart';
 import 'package:flutter/material.dart';
@@ -50,10 +51,12 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             const SizedBox(height: 17),
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.asset(
-                widget.selectedItems.imageUrl,
-                height: 184,
-                width: 328,
+              child: AspectRatio(
+                aspectRatio: 328 / 184,
+                child: Image.asset(
+                  widget.selectedItems.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             const SizedBox(height: 28),
@@ -80,131 +83,21 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             const SizedBox(height: 24),
             Row(
               children: [
-                Card(
-                  color: AppColors.light,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: AppColors.basePrimary,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: SizedBox(
-                    height: 54,
-                    width: 101,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20.0,
-                        top: 8.0,
-                        right: 20.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Released',
-                            style: AppTypography.subtitle2Regular
-                                .copyWith(color: AppColors.baseOnPrimaryLight),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 13.0,
-                              top: 4,
-                            ),
-                            child: Text(
-                              widget.selectedItems.releasedDate,
-                              style: AppTypography.body1SemiBold
-                                  .copyWith(color: AppColors.basePrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                BookDetailsNumberItem(
+                  title: 'Released',
+                  value: widget.selectedItems.releasedDate,
                 ),
                 const SizedBox(width: 4),
-                Card(
-                  color: AppColors.light,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: AppColors.basePrimary,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: SizedBox(
-                    height: 54,
-                    width: 101,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 31.0,
-                        top: 8.0,
-                        right: 31.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Pages',
-                            style: AppTypography.subtitle2Regular
-                                .copyWith(color: AppColors.baseOnPrimaryLight),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 7.0,
-                              top: 4,
-                            ),
-                            child: Text(
-                              widget.selectedItems.numberOfPage,
-                              style: AppTypography.body1SemiBold
-                                  .copyWith(color: AppColors.basePrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                BookDetailsNumberItem(
+                  title: 'Pages',
+                  value: widget.selectedItems.numberOfPage,
                 ),
                 const SizedBox(width: 4),
-                Card(
-                  color: AppColors.light,
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                      color: AppColors.basePrimary,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: SizedBox(
-                    height: 54,
-                    width: 101,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 28.0,
-                        top: 8.0,
-                        right: 28.0,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Rating',
-                            style: AppTypography.subtitle2Regular
-                                .copyWith(color: AppColors.baseOnPrimaryLight),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 17.5,
-                              top: 4,
-                            ),
-                            child: Text(
-                              widget.selectedItems.rating,
-                              style: AppTypography.body1SemiBold
-                                  .copyWith(color: AppColors.basePrimary),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                BookDetailsNumberItem(
+                  title: 'Rating',
+                  value: widget.selectedItems.ratingDetailsPage,
                 ),
+                const SizedBox(width: 4),
               ],
             ),
             const SizedBox(height: 24),
@@ -224,11 +117,9 @@ class _BookDetailsPageState extends State<BookDetailsPage> {
             Align(
               alignment: Alignment.bottomRight,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: 16),
                 child: CustomButton(
-                  onPressed: () => {
-                    // Output message to the console
-                  },
+                  onPressed: () => {},
                 ),
               ),
             ),
