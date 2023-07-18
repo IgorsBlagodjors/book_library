@@ -6,11 +6,6 @@ class BookInfo {
   final String imageUrl;
   final String grade;
   final int rating;
-  final Icon star1;
-  final Icon star2;
-  final Icon star3;
-  final Icon star4;
-  final Icon star5;
 
   BookInfo({
     required this.title,
@@ -18,10 +13,5 @@ class BookInfo {
     required this.imageUrl,
     required this.grade,
     required this.rating,
-    required this.star1,
-    required this.star2,
-    required this.star3,
-    required this.star4,
-    required this.star5,
   });
 }

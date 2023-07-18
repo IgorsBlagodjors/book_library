@@ -52,24 +52,24 @@ class BLBookListItem extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    items.star1,
-                    const SizedBox(width: 2.67),
-                    items.star2,
-                    const SizedBox(width: 2.67),
-                    items.star3,
-                    const SizedBox(width: 2.67),
-                    items.star4,
-                    const SizedBox(width: 2.67),
-                    items.star5,
-                    const SizedBox(width: 2.67),
+                    Row(
+                      children: List.generate(5, (index) {
+                        if (index < items.rating) {
+                          return AppIcons.star;
+                        } else {
+                          return AppIcons.starBorder;
+                        }
+                      }),
+                    ),
+                    const SizedBox(width: 3),
                     Text(
                       items.grade,
                       style: const TextStyle(
                         color: AppColors.basePrimary,
                       ),
-                    )
+                    ),
                   ],
-                ),
+                )
               ],
             ),
           )
