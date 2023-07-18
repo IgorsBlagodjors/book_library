@@ -48,7 +48,7 @@ class BLBookListItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(
-                  height: 17.3,
+                  height: 17,
                 ),
                 Row(
                   children: [
