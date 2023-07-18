@@ -2,6 +2,7 @@ import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
 import 'package:book_library/design_system/add_to_fave_list_button.dart';
+import 'package:book_library/domain/items/model/book_details_number_item.dart';
 import 'package:book_library/presentation/chars/bloc/book_home2_list_cubit.dart';
 import 'package:book_library/presentation/chars/bloc/book_home2_list_state.dart';
 import 'package:flutter/material.dart';
@@ -78,10 +79,12 @@ class _BookHome2State extends State<BookHome2> {
               const SizedBox(height: 17),
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: Image.network(
-                  data!.smallThumbnail,
-                  height: 184,
-                  width: 328,
+                child: AspectRatio(
+                  aspectRatio: 328 / 184,
+                  child: Image.network(
+                    data!.smallThumbnail,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               const SizedBox(height: 28),
@@ -108,118 +111,19 @@ class _BookHome2State extends State<BookHome2> {
               const SizedBox(height: 24),
               Row(
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Card(
-                      color: AppColors.light,
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          color: AppColors.basePrimary,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: SizedBox(
-                        height: 54,
-                        width: 101,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 8),
-                            Center(
-                              child: Text(
-                                AppLocalizations.of(context)!.released,
-                                style: AppTypography.subtitle2Regular.copyWith(
-                                    color: AppColors.baseOnPrimaryLight),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Center(
-                              child: Text(
-                                data.publishedDate.substring(0, 4),
-                                style: AppTypography.body1SemiBold
-                                    .copyWith(color: AppColors.basePrimary),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  BookDetailsNumberItem(
+                    title: AppLocalizations.of(context)!.released,
+                    value: data.publishedDate.substring(0, 4),
                   ),
                   const SizedBox(width: 4),
-                  Expanded(
-                    flex: 1,
-                    child: Card(
-                      color: AppColors.light,
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          color: AppColors.basePrimary,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: SizedBox(
-                        height: 54,
-                        width: 101,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 8),
-                            Center(
-                              child: Text(
-                                AppLocalizations.of(context)!.pages,
-                                style: AppTypography.subtitle2Regular.copyWith(
-                                    color: AppColors.baseOnPrimaryLight),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Center(
-                              child: Text(
-                                data.pageCount.toString(),
-                                style: AppTypography.body1SemiBold
-                                    .copyWith(color: AppColors.basePrimary),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  BookDetailsNumberItem(
+                    title: AppLocalizations.of(context)!.pages,
+                    value: data.pageCount.toString(),
                   ),
                   const SizedBox(width: 4),
-                  Expanded(
-                    flex: 1,
-                    child: Card(
-                      color: AppColors.light,
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(
-                          color: AppColors.basePrimary,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: SizedBox(
-                        height: 54,
-                        width: 101,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 8),
-                            Center(
-                              child: Text(
-                                AppLocalizations.of(context)!.rating,
-                                style: AppTypography.subtitle2Regular.copyWith(
-                                    color: AppColors.baseOnPrimaryLight),
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Center(
-                              child: Text(
-                                data.averageRating.toInt().toString(),
-                                style: AppTypography.body1SemiBold
-                                    .copyWith(color: AppColors.basePrimary),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  BookDetailsNumberItem(
+                    title: AppLocalizations.of(context)!.rating,
+                    value: data.averageRating.toString(),
                   ),
                 ],
               ),

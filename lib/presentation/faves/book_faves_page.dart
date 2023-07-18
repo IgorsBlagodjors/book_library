@@ -1,6 +1,7 @@
 import 'package:book_library/design_system/app_colors.dart';
 import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/app_typography.dart';
+import 'package:book_library/domain/items/model/book_details_number_item.dart';
 import 'package:book_library/presentation/faves/book_fave_list_cubit.dart';
 import 'package:book_library/presentation/faves/book_fave_list_state.dart';
 import 'package:flutter/material.dart';
@@ -58,10 +59,12 @@ class _BookFavesPageState extends State<BookFavesPage> {
                   Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.network(
-                        data[index].imageUrl,
-                        height: 184,
-                        width: 328,
+                      child: AspectRatio(
+                        aspectRatio: 328 / 184,
+                        child: Image.network(
+                          data[index].imageUrl,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -89,124 +92,19 @@ class _BookFavesPageState extends State<BookFavesPage> {
                   const SizedBox(height: 24),
                   Row(
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: Card(
-                          color: AppColors.light,
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: AppColors.basePrimary,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SizedBox(
-                            height: 54,
-                            width: 101,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 8),
-                                Center(
-                                  child: Text(
-                                    AppLocalizations.of(context)!.released,
-                                    style: AppTypography.subtitle2Regular
-                                        .copyWith(
-                                            color:
-                                                AppColors.baseOnPrimaryLight),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Center(
-                                  child: Text(
-                                    data[index].date.substring(0, 4),
-                                    style: AppTypography.body1SemiBold
-                                        .copyWith(color: AppColors.basePrimary),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                      BookDetailsNumberItem(
+                        title: AppLocalizations.of(context)!.released,
+                        value: data[index].date.substring(0, 4),
                       ),
                       const SizedBox(width: 4),
-                      Expanded(
-                        flex: 1,
-                        child: Card(
-                          color: AppColors.light,
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: AppColors.basePrimary,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SizedBox(
-                            height: 54,
-                            width: 101,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 8),
-                                Center(
-                                  child: Text(
-                                    AppLocalizations.of(context)!.pages,
-                                    style: AppTypography.subtitle2Regular
-                                        .copyWith(
-                                            color:
-                                                AppColors.baseOnPrimaryLight),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Center(
-                                  child: Text(
-                                    data[index].pages.toString(),
-                                    style: AppTypography.body1SemiBold
-                                        .copyWith(color: AppColors.basePrimary),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                      BookDetailsNumberItem(
+                        title: AppLocalizations.of(context)!.pages,
+                        value: data[index].pages.toString(),
                       ),
                       const SizedBox(width: 4),
-                      Expanded(
-                        flex: 1,
-                        child: Card(
-                          color: AppColors.light,
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: AppColors.basePrimary,
-                            ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: SizedBox(
-                            height: 54,
-                            width: 101,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(height: 8),
-                                Center(
-                                  child: Text(
-                                    AppLocalizations.of(context)!.rating,
-                                    style: AppTypography.subtitle2Regular
-                                        .copyWith(
-                                            color:
-                                                AppColors.baseOnPrimaryLight),
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Center(
-                                  child: Text(
-                                    data[index].rating.toInt().toString(),
-                                    style: AppTypography.body1SemiBold
-                                        .copyWith(color: AppColors.basePrimary),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                      BookDetailsNumberItem(
+                        title: AppLocalizations.of(context)!.rating,
+                        value: data[index].rating.toInt().toString(),
                       ),
                     ],
                   ),
