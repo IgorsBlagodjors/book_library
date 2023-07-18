@@ -1,4 +1,3 @@
-import 'package:book_library/design_system/app_icons.dart';
 import 'package:book_library/design_system/book_info.dart';
 import 'package:book_library/design_system/books_repository.dart';
 
