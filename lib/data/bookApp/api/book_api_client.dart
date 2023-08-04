@@ -18,6 +18,6 @@ class BookApiClient {
   Future<BookClass> getOneCharacterInfo(String id) async {
     final response = await _dio.get('volumes/$id');
     final fullResponse = BookDataResponse.fromJson(response.data);
-    return fullResponse.singleToModel();
+    return fullResponse.toModel();
   }
 }

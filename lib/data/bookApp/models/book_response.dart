@@ -46,7 +46,7 @@ class BookDataResponse {
     required this.volumeInfo,
   });
 
-  BookClass singleToModel(){
+  BookClass toModel(){
     return BookClass(
       id: id,
       title: volumeInfo.title ?? 'Unknown',
