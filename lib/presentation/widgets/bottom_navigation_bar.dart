@@ -1,6 +1,7 @@
 import 'package:book_library/presentation/bookApp/book_app_home_page.dart';
 import 'package:book_library/presentation/wishlist/book_wish_list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
@@ -19,6 +20,10 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(

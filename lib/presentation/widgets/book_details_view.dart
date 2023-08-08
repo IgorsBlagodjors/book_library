@@ -16,11 +16,7 @@ class BookDetailsView extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => BookAppDetailsPage(
-              passedId: items.id,
-            ).withCubit(),
-          ),
+          _createRoute(),
         );
       },
       child: Row(
@@ -88,6 +84,22 @@ class BookDetailsView extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Route _createRoute() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          BookAppDetailsPage(
+        passedId: items.id,
+      ).withCubit(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var tween = Tween(begin: const Offset(1.0, 0.0), end: Offset.zero)
+            .chain(CurveTween(curve: Curves.easeInOut));
+
+        return SlideTransition(position: animation.drive(tween), child: child);
+      },
+      transitionDuration: const Duration(milliseconds: 500),
     );
   }
 }

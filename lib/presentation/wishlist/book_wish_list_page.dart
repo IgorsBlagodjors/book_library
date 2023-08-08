@@ -69,7 +69,8 @@ class _BookWishListPageState extends State<BookWishListPage> {
                         _cubit.undo(data[index]);
                       },
                     ),
-                    content: Text('${data[index].name}  ${AppLocalizations.of(context)!.deleted}' ),
+                    content: Text(
+                        '${data[index].name}  ${AppLocalizations.of(context)!.deleted}'),
                   ),
                 );
               },
